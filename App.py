@@ -11,20 +11,19 @@ from app_styling import css, bot_template, user_template
 
 
 def get_pdf_text(docs):
-    def get_pdf_text(docs):
-        text = ""
-        for pdf in docs:
-            try:
-                pdf_reader = PdfReader(pdf)
-                for page in pdf_reader.pages:
-                    extracted_text = page.extract_text()
-                    if extracted_text:
-                        text += extracted_text
-                    else:
-                        st.warning(f"No text found on page {pdf_reader.pages.index(page)} in {pdf.name}")
-            except Exception as e:
-                st.error(f"Error reading {pdf.name}: {e}")
-        return text
+    text = ""
+    for pdf in docs:
+        try:
+            pdf_reader = PdfReader(pdf)
+            for page in pdf_reader.pages:
+                extracted_text = page.extract_text()
+                if extracted_text:
+                    text += extracted_text
+                else:
+                    st.warning(f"No text found on page {pdf_reader.pages.index(page)} in {pdf.name}")
+        except Exception as e:
+            st.error(f"Error reading {pdf.name}: {e}")
+    return text
 
 
 
